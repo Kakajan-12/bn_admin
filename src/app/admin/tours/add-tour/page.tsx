@@ -26,7 +26,6 @@ const AddTour = () => {
     const [lang_en, setLangEn] = useState('');
     const [lang_ru, setLangRu] = useState('');
     const [price, setPrice] = useState('');
-    const [map, setMap] = useState('');
     const [tour_type_id, setTourType] = useState('');
     const [tour_cat_id, setTourCat] = useState('');
     const [location_id, setLocationTour] = useState('');
@@ -96,7 +95,6 @@ const AddTour = () => {
         formData.append('lang_en', lang_en ?? '');
         formData.append('lang_ru', lang_ru ?? '');
         formData.append('price', price ?? '');
-        formData.append('map', map ?? '');
         formData.append('tour_type_id', tour_type_id ?? '');
         formData.append('tour_cat_id', tour_cat_id ?? '');
         formData.append('location_id', location_id ?? '');
@@ -131,7 +129,6 @@ const AddTour = () => {
                 setLangEn('');
                 setLangRu('');
                 setPrice('')
-                setMap('');
                 setTourType('');
                 setTourCat('');
                 setLocationTour('');
@@ -262,17 +259,6 @@ const AddTour = () => {
                                     <option value="0">No</option>
                                 </select>
                             </div>
-                        </div>
-                        <div className="mb-4 w-full">
-                            <label
-                                className="block text-gray-700 font-semibold mb-2">Map:</label>
-                            <textarea value={map}
-                                      onChange={(e) => setMap(e.target.value)}
-                                      rows={10}
-                                      required
-                                      className="border border-gray-300 rounded p-2 w-full">
-
-                            </textarea>
                         </div>
 
                         {isClient && (

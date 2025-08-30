@@ -11,7 +11,7 @@ const EditGallery = () => {
     const { id } = useParams();
     const router = useRouter();
 
-    const [data, setData] = useState({ image: '', blog_id: '' });
+    const [data, setData] = useState({ image: '', blog_id: '', is_gallery: 0 });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string>('');
@@ -46,7 +46,10 @@ const EditGallery = () => {
 
                 if (response.data && response.data.id) {
                     const rawData = response.data;
-                    setData(rawData);
+                    setData({
+                        ...rawData,
+                        is_gallery: Number(rawData.is_gallery)
+                    });
                     setLoading(false);
                 } else {
                     throw new Error('Данные не найдены');
@@ -70,6 +73,7 @@ const EditGallery = () => {
 
             const formData = new FormData();
             formData.append('blog_id', String(data.blog_id));
+            formData.append('is_gallery', String(data.is_gallery ?? 0));
 
             if (imageFile) {
                 formData.append('image', imageFile);
@@ -143,7 +147,7 @@ const EditGallery = () => {
                                     id="blog_id"
                                     name="blog_id"
                                     value={String(data.blog_id)}
-                                    onChange={(e) => setData((prev) => ({ ...prev, blog_id: e.target.value }))}
+                                    onChange={(e) => setData((prev) => ({...prev, blog_id: e.target.value}))}
                                     required
                                     className="border border-gray-300 rounded p-2 w-full focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-150"
                                 >
@@ -156,7 +160,19 @@ const EditGallery = () => {
                                 </select>
                             </div>
                         </div>
+                        <div className="mb-4">
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    checked={Number(data.is_gallery) === 1}
+                                    onChange={(e) =>
+                                        setData((prev) => ({...prev, is_gallery: e.target.checked ? 1 : 0}))
+                                    }
+                                />
 
+                                <span className="text-gray-700 font-semibold">Is Gallery</span>
+                            </label>
+                        </div>
                         {previewURL && (
                             <div className="mb-4">
                                 <label className="block font-semibold mb-2">Preview of New Image:</label>
@@ -174,7 +190,7 @@ const EditGallery = () => {
                             type="submit"
                             className="bg text-white px-4 py-2 rounded flex items-center hover:bg-blue-700"
                         >
-                            <DocumentIcon className="size-5 mr-2" />
+                            <DocumentIcon className="size-5 mr-2"/>
                             Save
                         </button>
                     </form>

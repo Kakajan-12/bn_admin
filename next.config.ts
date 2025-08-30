@@ -3,7 +3,7 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'api.sayodatravel.com',
+                hostname: 'api.bn-tour.com',
                 pathname: '/uploads/**',
             },
         ],

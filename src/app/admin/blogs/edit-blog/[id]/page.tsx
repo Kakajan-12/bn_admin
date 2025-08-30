@@ -15,7 +15,7 @@ interface BlogData {
     text_en: string;
     title_ru: string;
     text_ru: string;
-    main_image: string;
+    image: string;
 }
 
 const EditBlog = () => {
@@ -29,7 +29,7 @@ const EditBlog = () => {
         text_en: '',
         title_ru: '',
         text_ru: '',
-        main_image: ''
+        image: ''
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ const EditBlog = () => {
                         text_en: rawData.text_en,
                         title_ru: rawData.title_ru,
                         text_ru: rawData.text_ru,
-                        main_image: rawData.main_image,
+                        image: rawData.image,
                     });
 
                     setLoading(false);
@@ -97,7 +97,7 @@ const EditBlog = () => {
             if (imageFile) {
                 formData.append('image', imageFile);
             } else {
-                formData.append('image', data.main_image);
+                formData.append('image', data.image);
             }
 
             await axios.put(
@@ -132,11 +132,11 @@ const EditBlog = () => {
                 <div className="mt-8">
                     <h1 className="text-2xl font-bold mb-4">Edit Blogs</h1>
                     <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
-                        {data.main_image && (
+                        {data.image && (
                             <div className="mb-4">
                                 <label className="block font-semibold mb-2">Current image:</label>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data.main_image.replace('\\', '/')}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data.image.replace('\\', '/')}`}
                                     alt="Service"
                                     width={200}
                                     height={200}

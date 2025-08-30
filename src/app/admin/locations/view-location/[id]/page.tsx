@@ -62,7 +62,7 @@ const ViewLocation = () => {
             });
             setIsDeleting(false);
             setShowModal(false);
-            router.push('/admin/contact-address');
+            router.push('/admin/locations');
         } catch (err) {
             console.error("Ошибка при удалении:", err);
             setIsDeleting(false);

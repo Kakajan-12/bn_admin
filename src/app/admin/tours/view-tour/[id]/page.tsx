@@ -141,12 +141,6 @@ const ViewTour = () => {
                                     className="rounded"
                                 />
                             )}
-                            {data.map && (
-                                <div>
-                                    <strong>Map:</strong>
-                                    <div dangerouslySetInnerHTML={{__html: data.map}}/>
-                                </div>
-                            )}
                             <div className="space-y-6">
                                 <div>
                                     <strong>Popular:</strong>

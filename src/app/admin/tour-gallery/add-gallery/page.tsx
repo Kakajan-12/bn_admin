@@ -8,6 +8,7 @@ import TokenTimer from '@/Components/TokenTimer';
 const AddBlogGallery = () => {
     const [image, setImage] = useState<File | null>(null);
     const [tour_id, setTourId] = useState('');
+    const [isGallery, setIsGallery] = useState(0); // новое состояние
     const [tours, setTours] = useState<{ id: number, title_tk: string, title_en: string, title_ru: string }[]>([]);
 
     const router = useRouter();
@@ -38,6 +39,7 @@ const AddBlogGallery = () => {
         const formData = new FormData();
         if (image) formData.append('image', image);
         formData.append('tour_id', tour_id ?? '');
+        formData.append('is_gallery', String(isGallery)); // отправляем как строку "0" или "1"
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tour-gallery`, {
@@ -53,7 +55,8 @@ const AddBlogGallery = () => {
                 console.log('добавлен!', data);
                 setImage(null);
                 setTourId('');
-                router.push('/admin/tour-gallery'); // После добавления слайда редирект
+                setIsGallery(0);
+                router.push('/admin/tour-gallery');
             } else {
                 const errorText = await response.text();
                 console.error('Ошибка при добавлении:', errorText);
@@ -113,6 +116,19 @@ const AddBlogGallery = () => {
                                     ))}
                                 </select>
                             </div>
+                        </div>
+
+                        {/* Новый блок для is_gallery */}
+                        <div className="mb-4">
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    checked={isGallery === 1}
+                                    onChange={(e) => setIsGallery(e.target.checked ? 1 : 0)}
+                                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                />
+                                <span className="text-gray-700 font-semibold">Is Gallery</span>
+                            </label>
                         </div>
 
                         <button

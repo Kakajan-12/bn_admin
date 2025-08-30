@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'Sayoda Admin Panel',
+    title: 'BN Admin Panel',
 };
 
 export default function RootLayout({

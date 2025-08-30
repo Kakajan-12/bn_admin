@@ -40,7 +40,7 @@ const Login = () => {
     return (
         <div className="w-full h-screen flex justify-center items-center">
             <div className="p-10 rounded-md border border-gray-200 bg-white max-w-md w-full">
-                <h1 className="text-white text-center mb-5 text-2xl font-bold color">Sayoda Admin Panel</h1>
+                <h1 className="text-white text-center mb-5 text-2xl font-bold color">BN Tour Admin Panel</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col items-start w-full">
                         <label htmlFor="username" className="color font-bolder">Username</label>

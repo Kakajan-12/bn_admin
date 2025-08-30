@@ -34,7 +34,6 @@ const EditTour = () => {
         tour_type_id: number;
         tour_cat_id: number;
         location_id: number;
-        map: string;
     };
 
     const [data, setData] = useState<TourData>({
@@ -59,7 +58,6 @@ const EditTour = () => {
         tour_type_id: 0,
         tour_cat_id: 0,
         location_id: 0,
-        map: ''
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(true);
@@ -161,7 +159,6 @@ const EditTour = () => {
             formData.append('tour_type_id', String(data.tour_type_id));
             formData.append('tour_cat_id', String(data.tour_cat_id));
             formData.append('location_id', String(data.location_id));
-            formData.append('map', data.map);
 
 
             if (imageFile) {
@@ -346,18 +343,6 @@ const EditTour = () => {
                                 </select>
 
                             </div>
-                        </div>
-
-                        <div className="mb-4 w-full">
-                            <label
-                                className="block text-gray-700 font-semibold mb-2">Map:</label>
-                            <textarea value={data.map}
-                                      onChange={(e) => setData((prev) => ({...prev, map: e.target.value}))}
-                                      rows={10}
-                                      required
-                                      className="border border-gray-300 rounded p-2 w-full">
-
-                            </textarea>
                         </div>
 
                         <div className="tabs tabs-lift">

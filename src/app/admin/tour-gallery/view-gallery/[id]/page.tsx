@@ -18,6 +18,7 @@ type GalleryItem = {
     tour_title_tk: string;
     tour_title_en: string;
     tour_title_ru: string;
+    is_gallery: number;
 };
 
 const ViewTourGallery = () => {
@@ -149,15 +150,21 @@ const ViewTourGallery = () => {
                         <div className="space-y-6 md:ml-6 mt-4 md:mt-0">
                             <div>
                                 <h3 className="font-bold text-lg mb-2">Turkmen</h3>
-                                <div dangerouslySetInnerHTML={{ __html: data.tour_title_tk }} />
+                                <div dangerouslySetInnerHTML={{__html: data.tour_title_tk}}/>
                             </div>
                             <div>
                                 <h3 className="font-bold text-lg mb-2">English</h3>
-                                <div dangerouslySetInnerHTML={{ __html: data.tour_title_en }} />
+                                <div dangerouslySetInnerHTML={{__html: data.tour_title_en}}/>
                             </div>
                             <div>
                                 <h3 className="font-bold text-lg mb-2">Russian</h3>
-                                <div dangerouslySetInnerHTML={{ __html: data.tour_title_ru }} />
+                                <div dangerouslySetInnerHTML={{__html: data.tour_title_ru}}/>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-lg mb-2">Is Gallery</h3>
+                                <p className="text-gray-700">
+                                    {data.is_gallery === 1 ? '✅ Yes' : '❌ No'}
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ const AddBlogGallery = () => {
     const [image, setImage] = useState<File | null>(null);
     const [blog_id, setBlogId] = useState('');
     const [blogs, setBlogs] = useState<{ id: number, title_tk: string, title_en: string, title_ru: string }[]>([]);
+    const [isGallery, setIsGallery] = useState(false);
+
 
     const router = useRouter();
 
@@ -38,6 +40,8 @@ const AddBlogGallery = () => {
         const formData = new FormData();
         if (image) formData.append('image', image);
         formData.append('blog_id', blog_id ?? '');
+        formData.append("is_gallery", isGallery ? "1" : "0");
+
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog-gallery`, {
@@ -114,7 +118,17 @@ const AddBlogGallery = () => {
                                 </select>
                             </div>
                         </div>
-
+                        <div className="w-full">
+                            <label className="inline-flex items-center mt-6">
+                                <input
+                                    type="checkbox"
+                                    checked={isGallery}
+                                    onChange={(e) => setIsGallery(e.target.checked)}
+                                    className="form-checkbox h-5 w-5 text-blue-600"
+                                />
+                                <span className="ml-2 text-gray-700">Is Gallery</span>
+                            </label>
+                        </div>
                         <button
                             type="submit"
                             className="w-full bg hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-150"

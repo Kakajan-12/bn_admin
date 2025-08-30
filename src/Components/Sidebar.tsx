@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { TfiLayoutSlider } from "react-icons/tfi";
-import { VscFeedback,VscTypeHierarchySub } from "react-icons/vsc";
+import { VscTypeHierarchySub } from "react-icons/vsc";
 import { PiReadCvLogo } from "react-icons/pi";
 import { GrGallery } from "react-icons/gr";
 import { IoLocationSharp } from "react-icons/io5";
@@ -19,7 +19,6 @@ const menuGroups = [
         key: "content",
         links: [
             { href: "/admin/sliders", label: "Sliders", icon: TfiLayoutSlider },
-            { href: "/admin/testimonials", label: "Testimonials", icon: VscFeedback },
         ],
     },
     {
