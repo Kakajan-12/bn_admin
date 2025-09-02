@@ -88,7 +88,15 @@ const HotelAssets = () => {
 
     if (error) return <div className="text-red-500 py-4 text-center">{error}</div>;
 
-    const IconMap: Record<string, any> = {FaBed, FaUtensils, FaDumbbell, FaWifi, MdWaves, TbMassage};
+    const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+        FaBed,
+        FaUtensils,
+        FaDumbbell,
+        FaWifi,
+        MdWaves,
+        TbMassage,
+    };
+
 
     return (
         <div className="flex bg-gray-200 min-h-screen">

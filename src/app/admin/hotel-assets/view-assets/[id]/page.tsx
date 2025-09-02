@@ -23,7 +23,15 @@ interface AssetItem {
 }
 
 
-const IconMap: Record<string, any> = {FaBed, FaUtensils, FaDumbbell, FaWifi, MdWaves, TbMassage};
+const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    FaBed,
+    FaUtensils,
+    FaDumbbell,
+    FaWifi,
+    MdWaves,
+    TbMassage,
+};
+
 
 const ViewAsset = () => {
     const {id} = useParams();
@@ -136,11 +144,15 @@ const ViewAsset = () => {
                     </div>
                     <div className="flex items-center gap-6 mb-6">
                         <Icon className="w-12 h-12 text-blue-600"/>
-                            <div className="text-xl font-semibold" dangerouslySetInnerHTML={{__html: asset.hotels_title_en}}/>
+                        <div
+                            className="text-xl font-semibold"
+                            dangerouslySetInnerHTML={{__html: asset.hotels_title_en ?? ""}}
+                        />
+
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="p-4 bg-gray-50 rounded shadow">
+                    <div className="p-4 bg-gray-50 rounded shadow">
                             <h4 className="font-bold mb-2">Turkmen</h4>
                             <p>{asset.text_tk || "-"}</p>
                         </div>
