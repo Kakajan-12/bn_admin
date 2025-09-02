@@ -6,12 +6,13 @@ import { PiReadCvLogo } from "react-icons/pi";
 import { GrGallery } from "react-icons/gr";
 import { IoLocationSharp } from "react-icons/io5";
 import { LuMails, LuCalendarDays  } from "react-icons/lu";
-import { FaPhoneSquareAlt } from "react-icons/fa";
+import { FaPhoneSquareAlt, FaPhotoVideo  } from "react-icons/fa";
 import { MdTour } from "react-icons/md";
 import { IoMdCheckmarkCircleOutline, IoIosCloseCircleOutline  } from "react-icons/io";
-import { TbCategoryFilled } from "react-icons/tb";
+import { TbCategoryFilled, TbHotelService  } from "react-icons/tb";
 import { FaLocationDot,FaMapLocationDot, FaPassport } from "react-icons/fa6";
 import { RiLinksLine } from "react-icons/ri";
+import { LiaHotelSolid } from "react-icons/lia";
 
 const menuGroups = [
     {
@@ -19,6 +20,7 @@ const menuGroups = [
         key: "content",
         links: [
             { href: "/admin/sliders", label: "Sliders", icon: TfiLayoutSlider },
+            { href: "/admin/video", label: "Video", icon: FaPhotoVideo  },
         ],
     },
     {
@@ -53,6 +55,16 @@ const menuGroups = [
             { href: "/admin/tour-gallery", label: "Gallery", icon: GrGallery},
             { href: "/admin/tour-location", label: "Tours Location", icon: FaMapLocationDot},
             { href: "/admin/visa", label: "Visa Requirements", icon: FaPassport},
+        ],
+    },
+    {
+        title: "Hotels",
+        key: "hotels",
+        links: [
+            { href: "/admin/hotels", label: "Hotels", icon: LiaHotelSolid},
+            { href: "/admin/hotel-assets", label: "Hotel Assets", icon: TbHotelService },
+            { href: "/admin/hotel-gallery", label: "Hotel Gallery", icon: GrGallery},
+            { href: "/admin/hotel-location", label: "Hotel Location", icon: FaMapLocationDot},
         ],
     },
 ];

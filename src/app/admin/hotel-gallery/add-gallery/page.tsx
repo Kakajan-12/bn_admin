@@ -5,20 +5,19 @@ import { useRouter } from 'next/navigation';
 import Sidebar from '@/Components/Sidebar';
 import TokenTimer from '@/Components/TokenTimer';
 
-const AddTourGallery = () => {
+const AddHotelGallery = () => {
     const [image, setImage] = useState<File | null>(null);
-    const [tour_id, setTourId] = useState('');
-    const [isGallery, setIsGallery] = useState(0); // новое состояние
-    const [tours, setTours] = useState<{ id: number, title_tk: string, title_en: string, title_ru: string }[]>([]);
+    const [hotel_id, setHotelId] = useState('');
+    const [hotels, setHotels] = useState<{ id: number, title_tk: string, title_en: string, title_ru: string }[]>([]);
 
     const router = useRouter();
 
     useEffect(() => {
         const fetchTours = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tours`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hotels`);
                 const data = await res.json();
-                setTours(data);
+                setHotels(data);
             } catch (err) {
                 console.error('Ошибка при загрузке:', err);
             }
@@ -38,11 +37,10 @@ const AddTourGallery = () => {
 
         const formData = new FormData();
         if (image) formData.append('image', image);
-        formData.append('tour_id', tour_id ?? '');
-        formData.append('is_gallery', String(isGallery)); // отправляем как строку "0" или "1"
+        formData.append('hotel_id', hotel_id ?? '');
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tour-gallery`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hotel-gallery`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -54,9 +52,8 @@ const AddTourGallery = () => {
                 const data = await response.json();
                 console.log('добавлен!', data);
                 setImage(null);
-                setTourId('');
-                setIsGallery(0);
-                router.push('/admin/tour-gallery');
+                setHotelId('');
+                router.push('/admin/hotel-gallery');
             } else {
                 const errorText = await response.text();
                 console.error('Ошибка при добавлении:', errorText);
@@ -76,7 +73,7 @@ const AddTourGallery = () => {
                         onSubmit={handleSubmit}
                         className="w-full mx-auto p-6 border border-gray-300 rounded-lg shadow-lg bg-white"
                     >
-                        <h2 className="text-2xl font-bold mb-4 text-left">Add new tour gallery</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-left">Add new hotel gallery</h2>
 
                         <div className="mb-4 flex space-x-4">
                             <div className="w-full">
@@ -98,37 +95,24 @@ const AddTourGallery = () => {
                             </div>
                             <div className="w-full">
                                 <label className="block text-gray-700 font-semibold mb-2">
-                                    Blog:
+                                    Hotel:
                                 </label>
                                 <select
-                                    id="tour_id"
-                                    name="tour_id"
-                                    value={tour_id}
-                                    onChange={(e) => setTourId(e.target.value)}
+                                    id="hotel_id"
+                                    name="hotel_id"
+                                    value={hotel_id}
+                                    onChange={(e) => setHotelId(e.target.value)}
                                     required
                                     className="border border-gray-300 rounded p-2 w-full focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-150"
                                 >
-                                    <option value="">Select tour</option>
-                                    {tours.map((tour) => (
-                                        <option key={tour.id} value={tour.id}>
-                                            {tour.title_en} / {tour.title_tk} / {tour.title_ru}
+                                    <option value="">Select hotel</option>
+                                    {hotels.map((hotel) => (
+                                        <option key={hotel.id} value={hotel.id}>
+                                            {hotel.title_en} / {hotel.title_tk} / {hotel.title_ru}
                                         </option>
                                     ))}
                                 </select>
                             </div>
-                        </div>
-
-                        {/* Новый блок для is_gallery */}
-                        <div className="mb-4">
-                            <label className="flex items-center space-x-2">
-                                <input
-                                    type="checkbox"
-                                    checked={isGallery === 1}
-                                    onChange={(e) => setIsGallery(e.target.checked ? 1 : 0)}
-                                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                />
-                                <span className="text-gray-700 font-semibold">Is Gallery</span>
-                            </label>
                         </div>
 
                         <button
@@ -144,4 +128,4 @@ const AddTourGallery = () => {
     );
 };
 
-export default AddTourGallery;
+export default AddHotelGallery;

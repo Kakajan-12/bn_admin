@@ -1,8 +1,7 @@
 'use client';
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import axios from 'axios';
-import Image from 'next/image';
+import axios, { AxiosError } from 'axios';
 import Sidebar from "@/Components/Sidebar";
 import TokenTimer from "@/Components/TokenTimer";
 import { Menu, Transition } from '@headlessui/react';
@@ -12,18 +11,16 @@ import {
     TrashIcon,
 } from '@heroicons/react/16/solid';
 
-type GalleryItem = {
-    id: number;
-    image: string;
-    tour_title_tk: string;
-    tour_title_en: string;
-    tour_title_ru: string;
-    is_gallery: number;
+type HotelData = {
+    id: string;
+    location_tk: string;
+    location_en: string;
+    location_ru: string;
 };
 
-const ViewTourGallery = () => {
+const ViewHotelLocation = () => {
     const { id } = useParams();
-    const [data, setData] = useState<GalleryItem | null>(null);
+    const [data, setData] = useState<HotelData | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -33,20 +30,20 @@ const ViewTourGallery = () => {
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('auth_token');
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/tour-gallery/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/hotel-location/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setData(response.data);
+                console.log("Полученные данные:", response.data);
+                setData(response.data[0]);
             } catch (err) {
-                if (axios.isAxiosError(err)) {
-                    setError('Ошибка при получении данных');
-                    if (err.response?.status === 401) {
-                        router.push('/');
-                    }
-                } else {
-                    setError('Неизвестная ошибка');
+                const axiosError = err as AxiosError;
+                console.error(axiosError);
+                setError("Ошибка при получении данных");
+
+                if (axios.isAxiosError(axiosError) && axiosError.response?.status === 401) {
+                    router.push("/");
                 }
             }
         };
@@ -58,14 +55,14 @@ const ViewTourGallery = () => {
         setIsDeleting(true);
         try {
             const token = localStorage.getItem('auth_token');
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tour-gallery/${id}`, {
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/hotel-location/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             setIsDeleting(false);
             setShowModal(false);
-            router.push('/admin/tour-gallery');
+            router.push('/admin/hotel-location');
         } catch (err) {
             console.error("Ошибка при удалении:", err);
             setIsDeleting(false);
@@ -83,11 +80,11 @@ const ViewTourGallery = () => {
                 <TokenTimer />
                 <div className="mt-8">
                     <div className="w-full flex justify-between">
-                        <h2 className="text-2xl font-bold mb-4">View Tour Gallery</h2>
+                        <h2 className="text-2xl font-bold mb-4">View Hotel Location</h2>
                         <Menu as="div" className="relative inline-block text-left">
-                            <Menu.Button className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm font-semibold text-white hover:bg-gray-700">
+                            <Menu.Button className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm font-semibold text-white shadow-inner hover:bg-gray-700 focus:outline-none cursor-pointer">
                                 Options
-                                <ChevronDownIcon className="w-4 h-4" />
+                                <ChevronDownIcon className="w-4 h-4 fill-white/60" />
                             </Menu.Button>
 
                             <Transition
@@ -99,31 +96,31 @@ const ViewTourGallery = () => {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                                     <div className="py-1">
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <button
-                                                    onClick={() => router.push(`/admin/tour-gallery/edit-gallery/${id}`)}
+                                                    onClick={() => router.push(`/admin/hotel-location/edit-hotel-location/${id}`)}
                                                     className={`${
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
-                                                    } group flex w-full items-center px-4 py-2 text-sm`}
+                                                    } group flex w-full items-center px-4 py-2 text-sm cursor-pointer`}
                                                 >
-                                                    <PencilIcon className="w-4 h-4 mr-2" />
+                                                    <PencilIcon className="w-4 h-4 mr-2 text-gray-400" />
                                                     Edit
                                                 </button>
                                             )}
                                         </Menu.Item>
-                                        <div className="border-t border-gray-100" />
+                                        <div className="border-t border-gray-100"></div>
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <button
                                                     onClick={() => setShowModal(true)}
                                                     className={`${
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
-                                                    } group flex w-full items-center px-4 py-2 text-sm`}
+                                                    } group flex w-full items-center px-4 py-2 text-sm cursor-pointer`}
                                                 >
-                                                    <TrashIcon className="w-4 h-4 mr-2" />
+                                                    <TrashIcon className="w-4 h-4 mr-2 text-gray-400" />
                                                     Delete
                                                 </button>
                                             )}
@@ -134,47 +131,44 @@ const ViewTourGallery = () => {
                         </Menu>
                     </div>
 
-                    <div className="bg-white p-4 rounded-md border border-gray-200 mt-6 flex flex-col md:flex-row">
-                        <div>
-                            {data.image && (
-                                <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data.image.replace('\\', '/')}`}
-                                    alt="Gallery image"
-                                    width={500}
-                                    height={400}
-                                    className="rounded mb-6"
-                                />
-                            )}
-                        </div>
-
-                        <div className="space-y-6 md:ml-6 mt-4 md:mt-0">
-                            <div>
-                                <h3 className="font-bold text-lg mb-2">Turkmen</h3>
-                                <div dangerouslySetInnerHTML={{__html: data.tour_title_tk}}/>
+                    <div className="bg-white p-4 rounded-md border-gray-200 flex">
+                        <div className="space-y-2 ml-4">
+                            <div className="mb-10">
+                                <div className="font-bold text-lg mb-4">Turkmen</div>
+                                {data.location_tk && (
+                                    <div>
+                                        <strong>Location:</strong>
+                                        <div dangerouslySetInnerHTML={{ __html: data.location_tk }} />
+                                    </div>
+                                )}
                             </div>
-                            <div>
-                                <h3 className="font-bold text-lg mb-2">English</h3>
-                                <div dangerouslySetInnerHTML={{__html: data.tour_title_en}}/>
+                            <div className="mb-10">
+                                <div className="font-bold text-lg mb-4">English</div>
+                                {data.location_en && (
+                                    <div>
+                                        <strong>Location:</strong>
+                                        <div dangerouslySetInnerHTML={{ __html: data.location_en }} />
+                                    </div>
+                                )}
                             </div>
-                            <div>
-                                <h3 className="font-bold text-lg mb-2">Russian</h3>
-                                <div dangerouslySetInnerHTML={{__html: data.tour_title_ru}}/>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg mb-2">Is Gallery</h3>
-                                <p className="text-gray-700">
-                                    {data.is_gallery === 1 ? '✅ Yes' : '❌ No'}
-                                </p>
+                            <div className="mb-10">
+                                <div className="font-bold text-lg mb-4">Russian</div>
+                                {data.location_ru && (
+                                    <div>
+                                        <strong>Location:</strong>
+                                        <div dangerouslySetInnerHTML={{ __html: data.location_ru }} />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {showModal && (
-                    <div className="fixed inset-0 bg-opacity-40 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
                         <div className="bg-white p-6 rounded shadow-md w-96">
-                            <h2 className="text-lg font-bold mb-4">Remove Tour gallery</h2>
-                            <p className="mb-6">Are you sure you want to delete this gallery?</p>
+                            <h2 className="text-lg font-bold mb-4">Remove hotel location</h2>
+                            <p className="mb-6">Are you sure you want to delete this hotel location?</p>
                             <div className="flex justify-end space-x-4">
                                 <button
                                     className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
@@ -199,4 +193,4 @@ const ViewTourGallery = () => {
     );
 };
 
-export default ViewTourGallery;
+export default ViewHotelLocation;

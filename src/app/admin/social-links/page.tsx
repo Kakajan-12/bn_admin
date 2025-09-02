@@ -17,7 +17,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import TikTokIcon from '@mui/icons-material/MusicNote'; // Заменитель для TikTok
+import TikTokIcon from '@mui/icons-material/MusicNote';
 
 interface LinkType {
     id: number;

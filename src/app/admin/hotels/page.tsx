@@ -8,33 +8,21 @@ import Link from "next/link";
 import {EyeIcon, PlusCircleIcon} from "@heroicons/react/16/solid";
 import Image from "next/image";
 
-interface ToursItem {
+interface HotelItem {
     id: number;
     image: string;
-    popular: boolean;
     title_tk: string;
     title_en: string;
     title_ru: string;
     text_tk: string;
     text_en: string;
     text_ru: string;
-    destination_tk: string;
-    destination_en: string;
-    destination_ru: string;
-    duration_tk: string;
-    duration_en: string;
-    duration_ru: string;
-    lang_tk: string;
-    lang_en: string;
-    lang_ru: string;
-    price: number;
-    tour_type_id: number;
-    tour_cat_id: number;
+    rating: number;
     location_id: number;
 }
 
-const Tours = () => {
-    const [tours, settours] = useState<ToursItem[]>([]);
+const Hotels = () => {
+    const [hotels, setHotels] = useState<HotelItem[]>([]);
 
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
@@ -48,13 +36,13 @@ const Tours = () => {
                     return;
                 }
 
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/tours`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/hotels`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                settours(response.data);
+                setHotels(response.data);
             } catch (err) {
                 const axiosError = err as AxiosError;
                 console.error(axiosError);
@@ -81,7 +69,7 @@ const Tours = () => {
                 <div className="mt-8">
                     <div className="w-full flex justify-between">
                         <h2 className="text-2xl font-bold mb-4">Tours</h2>
-                        <Link href="/admin/tours/add-tour"
+                        <Link href="/admin/hotels/add-hotel"
                               className="bg text-white h-fit py-2 px-8 rounded-md cursor-pointer flex items-center"><PlusCircleIcon
                             className="size-6" color="#ffffff"/>
                             <div className="ml-2">Add</div>
@@ -94,41 +82,37 @@ const Tours = () => {
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-gray-600">Turkmen</th>
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-gray-600">English</th>
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-gray-600">Russian</th>
-                            <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-gray-600">Popular</th>
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-gray-600">View</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {tours.length === 0 ? (
+                        {hotels.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="text-center py-4">No tours available</td>
                             </tr>
                         ) : (
-                            tours.map(tour => (
-                                <tr key={tour.id}>
+                            hotels.map(hotel => (
+                                <tr key={hotel.id}>
                                     <td className="py-4 px-4 border-b border-gray-200">
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/${tour.image}`.replace(/\\/g, '/')}
-                                            alt={`News ${tour.id}`}
+                                            src={`${process.env.NEXT_PUBLIC_API_URL}/${hotel.image}`.replace(/\\/g, '/')}
+                                            alt={`Hotel ${hotel.id}`}
                                             width={100}
                                             height={100}
                                         />
 
                                     </td>
                                     <td className="py-4 px-4 border-b border-gray-200">
-                                        <div dangerouslySetInnerHTML={{__html: tour.title_tk}}/>
+                                        <div dangerouslySetInnerHTML={{__html: hotel.title_tk}}/>
                                     </td>
                                     <td className="py-4 px-4 border-b border-gray-200">
-                                        <div dangerouslySetInnerHTML={{__html: tour.title_en}}/>
+                                        <div dangerouslySetInnerHTML={{__html: hotel.title_en}}/>
                                     </td>
                                     <td className="py-4 px-4 border-b border-gray-200">
-                                        <div dangerouslySetInnerHTML={{__html: tour.title_ru}}/>
+                                        <div dangerouslySetInnerHTML={{__html: hotel.title_ru}}/>
                                     </td>
                                     <td className="py-4 px-4 border-b border-gray-200">
-                                        <p>{Number(tour.popular) === 1 ? 'Yes' : 'No'}</p>
-                                    </td>
-                                    <td className="py-4 px-4 border-b border-gray-200">
-                                        <Link href={`/admin/tours/view-tour/${tour.id}`}
+                                        <Link href={`/admin/hotels/view-hotel/${hotel.id}`}
                                               className="bg text-white py-2 px-8 rounded-md cursor-pointer flex w-32"><EyeIcon
                                             color="#ffffff"/>
                                             <div className="ml-2">View</div>
@@ -145,4 +129,4 @@ const Tours = () => {
     )
 }
 
-export default Tours;
+export default Hotels;
