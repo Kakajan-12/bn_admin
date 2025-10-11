@@ -16,8 +16,8 @@ interface Address {
 }
 
 const Address = () => {
-    const [addresses, setAddresses] = useState<Address[]>([]); // Type the state with Service[]
-    const [error, setError] = useState<string | null>(null); // Error state
+    const [addresses, setAddresses] = useState<Address[]>([]);
+    const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {

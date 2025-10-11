@@ -138,7 +138,7 @@ const EditGallery = () => {
                             </div>
                             <div className="w-full">
                                 <label className="block text-gray-700 font-semibold mb-2">
-                                    Tour:
+                                    Hotel:
                                 </label>
                                 <select
                                     id="hotel_id"
