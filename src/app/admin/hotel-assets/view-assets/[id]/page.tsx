@@ -5,10 +5,12 @@ import axios from "axios";
 import Sidebar from "@/Components/Sidebar";
 import TokenTimer from "@/Components/TokenTimer";
 import {FaBed, FaUtensils, FaDumbbell, FaWifi} from "react-icons/fa6";
-import {MdWaves} from "react-icons/md";
+import {MdOutlineFreeBreakfast, MdWaves} from "react-icons/md";
 import {TbMassage} from "react-icons/tb";
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon, PencilIcon, TrashIcon} from "@heroicons/react/16/solid";
+import {LuSquareParking} from "react-icons/lu";
+import {GiTennisCourt} from "react-icons/gi";
 
 interface AssetItem {
     id: number;
@@ -30,6 +32,9 @@ const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     FaWifi,
     MdWaves,
     TbMassage,
+    LuSquareParking,
+    MdOutlineFreeBreakfast,
+    GiTennisCourt
 };
 
 

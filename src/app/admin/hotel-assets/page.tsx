@@ -9,6 +9,9 @@ import {ChevronDownIcon, ChevronUpIcon, PlusCircleIcon} from "@heroicons/react/1
 import {FaBed, FaUtensils, FaDumbbell, FaWifi} from "react-icons/fa6";
 import {MdWaves} from "react-icons/md";
 import {TbMassage} from "react-icons/tb";
+import { LuSquareParking } from "react-icons/lu";
+import { MdOutlineFreeBreakfast } from "react-icons/md";
+import { GiTennisCourt } from "react-icons/gi";
 
 interface AssetItem {
     id: number;
@@ -62,7 +65,6 @@ const HotelAssets = () => {
                         const hotel = hotels.find(h => h.id === item.hotel_id);
                         group = {
                             hotel_id: item.hotel_id,
-                            // тут вытаскиваем title_en
                             hotel_title: hotel?.title_en?.replace(/<\/?[^>]+(>|$)/g, "") || "Untitled",
                             data: [],
                         };
@@ -95,6 +97,9 @@ const HotelAssets = () => {
         FaWifi,
         MdWaves,
         TbMassage,
+        LuSquareParking,
+        MdOutlineFreeBreakfast,
+        GiTennisCourt
     };
 
 

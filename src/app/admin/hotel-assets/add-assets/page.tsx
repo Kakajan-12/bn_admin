@@ -5,8 +5,10 @@ import axios from 'axios';
 import Sidebar from '@/Components/Sidebar';
 import TokenTimer from '@/Components/TokenTimer';
 import {FaBed, FaUtensils, FaDumbbell, FaWifi} from "react-icons/fa6";
-import {MdWaves} from "react-icons/md";
+import {MdOutlineFreeBreakfast, MdWaves} from "react-icons/md";
 import {TbMassage} from "react-icons/tb";
+import {LuSquareParking} from "react-icons/lu";
+import {GiTennisCourt} from "react-icons/gi";
 
 const iconOptions = [
     {value: "FaBed", label: "Bed", icon: FaBed},
@@ -15,6 +17,9 @@ const iconOptions = [
     {value: "FaWifi", label: "WiFi", icon: FaWifi},
     {value: "MdWaves", label: "Pool", icon: MdWaves},
     {value: "TbMassage", label: "Spa / Massage", icon: TbMassage},
+    {value: "LuSquareParking", label: "Parking", icon: LuSquareParking},
+    {value: "MdOutlineFreeBreakfast", label: "Breakfast", icon: MdOutlineFreeBreakfast},
+    {value: "GiTennisCourt", label: "Tennis", icon: GiTennisCourt},
 ];
 
 interface Hotel {
