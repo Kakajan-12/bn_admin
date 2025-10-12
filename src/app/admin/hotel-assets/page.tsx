@@ -147,7 +147,7 @@ const HotelAssets = () => {
 
                                                     <div className="mt-auto w-full flex justify-around mt-2">
                                                         <Link
-                                                            href={`/admin/hotel-assets/edit/${asset.id}`}
+                                                            href={`/admin/hotel-assets/edit-assets/${asset.id}`}
                                                             className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
                                                         >
                                                             Edit
