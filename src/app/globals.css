@@ -112,3 +112,23 @@ body {
   border-top: 1px solid #e5e7eb; /* gray-200 */
   margin: 2rem 0;
 }
+
+
+/* 🔒 Принудительно светлая тема для Tiptap */
+.ProseMirror {
+  background-color: #ffffff !important;
+  color: #171717 !important;
+}
+
+.ProseMirror * {
+  color: #171717 !important;
+}
+
+/* курсор, placeholder, выделение */
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #999999 !important;
+}
+
+.ProseMirror ::selection {
+  background: rgba(0, 100, 255, 0.2) !important;
+}
