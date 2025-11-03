@@ -1,6 +1,14 @@
 import type { Config } from "tailwindcss"
+import daisyui from "daisyui"
 
-const config: Config = {
+interface DaisyConfig extends Config {
+    daisyui?: {
+        themes?: string[] | false
+        darkTheme?: string
+    }
+}
+
+const config: DaisyConfig = {
     darkMode: false,
     content: [
         "./src/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,9 +16,9 @@ const config: Config = {
     theme: {
         extend: {},
     },
-    plugins: [require("daisyui")],
+    plugins: [daisyui],
     daisyui: {
-        themes: ["light"],
+        themes: ["light"], // ✅ только светлая тема
     },
 }
 
