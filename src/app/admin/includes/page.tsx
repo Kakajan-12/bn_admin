@@ -116,8 +116,14 @@ const Includes = () => {
                                                 <div key={item.id} className="bg-white rounded shadow p-4 w-full min-w-[18rem] flex flex-row justify-between">
                                                     <div>
                                                         <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_tk }} />
-                                                        <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_en }} />
-                                                        <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_ru }} />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm text-gray-700"
+                                                           dangerouslySetInnerHTML={{__html: item.text_en}}/>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm text-gray-700"
+                                                           dangerouslySetInnerHTML={{__html: item.text_ru}}/>
                                                     </div>
                                                     <Link
                                                         href={`/admin/includes/view-includes/${item.id}`}

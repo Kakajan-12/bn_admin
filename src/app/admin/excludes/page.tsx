@@ -13,7 +13,7 @@ interface DataItem {
     text_en: string;
     text_ru: string;
     tour_id: number;
-    tour_title_tk: string;
+    tour_title_en: string;
 }
 
 interface GroupedExclude {
@@ -43,7 +43,7 @@ const Excludes = () => {
                 const groupedMap: { [title: string]: DataItem[] } = {};
 
                 response.data.forEach((item: DataItem) => {
-                    const title = item.tour_title_tk || `Tour ${item.tour_id}`;
+                    const title = item.tour_title_en;
                     if (groupedMap[title]) {
                         groupedMap[title].push(item);
                     } else {
@@ -101,11 +101,12 @@ const Excludes = () => {
                                     onClick={() => toggleExpand(group.tour_title_en)}
                                     className="w-full text-left p-4 hover:bg-gray-100 flex justify-between items-center"
                                 >
-                                    <div className="text-lg font-medium">Tour Name: {group.tour_title_en}</div>
+                                    <div className="text-lg font-medium"
+                                         dangerouslySetInnerHTML={{__html: group.tour_title_en}}/>
                                     {expanded === group.tour_title_en ? (
-                                        <ChevronUpIcon className="w-5 h-5" />
+                                        <ChevronUpIcon className="w-5 h-5"/>
                                     ) : (
-                                        <ChevronDownIcon className="w-5 h-5" />
+                                        <ChevronDownIcon className="w-5 h-5"/>
                                     )}
                                 </button>
 
@@ -116,8 +117,14 @@ const Excludes = () => {
                                                 <div key={item.id} className="bg-white rounded shadow p-4 w-full min-w-[18rem] flex flex-row justify-between">
                                                     <div>
                                                         <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_tk }} />
-                                                        <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_en }} />
-                                                        <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: item.text_ru }} />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm text-gray-700"
+                                                           dangerouslySetInnerHTML={{__html: item.text_en}}/>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm text-gray-700"
+                                                           dangerouslySetInnerHTML={{__html: item.text_ru}}/>
                                                     </div>
                                                     <Link
                                                         href={`/admin/excludes/view-excludes/${item.id}`}

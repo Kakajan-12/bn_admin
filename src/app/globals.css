@@ -31,19 +31,16 @@ body {
   background-color: #002A5F;
 }
 
-/* TipTap editor default styles – для отображения контента */
 .tiptap-content {
   font-family: system-ui, sans-serif;
   line-height: 1.6;
   font-size: 1rem;
-  color: #111827; /* text-gray-900 */
+  color: #111827;
 
-  /* Убираем отступы по умолчанию */
   margin: 0;
   padding: 0;
 }
 
-/* Заголовки */
 .tiptap-content h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -67,12 +64,10 @@ body {
   margin: 0.8rem 0 0.5rem;
 }
 
-/* Параграфы */
 .tiptap-content p {
   margin-bottom: 1rem;
 }
 
-/* Списки */
 .tiptap-content ul {
   list-style-type: disc;
   padding-left: 1.5rem;
@@ -87,7 +82,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Жирный и курсив */
 .tiptap-content strong {
   font-weight: bold;
 }
@@ -98,7 +92,6 @@ body {
   text-decoration: underline;
 }
 
-/* Прочее */
 .tiptap-content blockquote {
   border-left: 4px solid #d1d5db; /* gray-300 */
   padding-left: 1rem;
@@ -114,7 +107,6 @@ body {
 }
 
 
-/* 🔒 Принудительно светлая тема для Tiptap */
 .ProseMirror {
   background-color: #ffffff !important;
   color: #171717 !important;
@@ -124,7 +116,6 @@ body {
   color: #171717 !important;
 }
 
-/* курсор, placeholder, выделение */
 .ProseMirror p.is-editor-empty:first-child::before {
   color: #999999 !important;
 }
