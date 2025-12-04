@@ -72,7 +72,6 @@ const AddAsset = () => {
         }
     };
 
-    // Добавить новый пустой asset
     const addNewAsset = () => {
         setAssets(prev => [...prev, {
             hotel_id: '',
@@ -83,14 +82,12 @@ const AddAsset = () => {
         }]);
     };
 
-    // Удалить asset
     const removeAsset = (index: number) => {
         if (assets.length > 1) {
             setAssets(prev => prev.filter((_, i) => i !== index));
         }
     };
 
-    // Обновить конкретное поле в определенном asset
     const updateAsset = (index: number, field: keyof AssetItem, value: string) => {
         setAssets(prev => prev.map((item, i) =>
             i === index ? { ...item, [field]: value } : item
@@ -108,7 +105,6 @@ const AddAsset = () => {
                 return;
             }
 
-            // Фильтруем пустые assets (где нет хотя бы одного заполненного поля)
             const nonEmptyAssets = assets.filter(item =>
                 item.hotel_id.trim() ||
                 item.text_tk.trim() ||
@@ -122,7 +118,6 @@ const AddAsset = () => {
                 return;
             }
 
-            // Проверяем, что для каждого asset выбран отель
             const hasEmptyHotel = nonEmptyAssets.some(item => !item.hotel_id.trim());
             if (hasEmptyHotel) {
                 setError('Please select a hotel for all assets');
@@ -130,7 +125,6 @@ const AddAsset = () => {
                 return;
             }
 
-            // Отправляем все assets по одному (используем существующий endpoint)
             await handleSubmitOneByOne(nonEmptyAssets, token);
 
         } catch {
@@ -141,7 +135,6 @@ const AddAsset = () => {
         }
     };
 
-    // Отправка по одному (используем существующий endpoint)
     const handleSubmitOneByOne = async (nonEmptyAssets: AssetItem[], token: string) => {
         try {
             let successCount = 0;
@@ -169,7 +162,6 @@ const AddAsset = () => {
                 setSuccess(`${successCount} of ${nonEmptyAssets.length} asset(s) successfully added!`);
                 setError(null);
 
-                // Сброс формы
                 setAssets([{
                     hotel_id: '',
                     icon: 'FaBed',
@@ -226,7 +218,6 @@ const AddAsset = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                    {/* Hotel Select */}
                                     <div className="mb-4">
                                         <label className="block font-medium mb-2">Hotel *</label>
                                         <select
@@ -244,7 +235,6 @@ const AddAsset = () => {
                                         </select>
                                     </div>
 
-                                    {/* Icon Select */}
                                     <div className="mb-4">
                                         <label className="block font-medium mb-2">Icon</label>
                                         <select
@@ -281,7 +271,6 @@ const AddAsset = () => {
                                     </div>
                                 </div>
 
-                                {/* Text Fields */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div className="mb-4">
                                         <label className="block font-medium mb-2">Text (Turkmen)</label>
