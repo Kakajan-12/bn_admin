@@ -239,7 +239,6 @@ const AddTour = () => {
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                     type="text"
-                                    required
                                     className="border border-gray-300 rounded p-2 w-full"
                                 />
                             </div>
