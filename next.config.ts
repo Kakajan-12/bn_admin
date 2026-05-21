@@ -4,7 +4,7 @@ module.exports = {
             {
                 protocol: 'https',
                 hostname: 'api.bn-tour.com',
-                pathname: '/uploads/**',
+                pathname: '/**',
             },
         ],
     },

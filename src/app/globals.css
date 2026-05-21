@@ -8,6 +8,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
 }
 
 @theme inline {
@@ -15,6 +22,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --radius-md: calc(var(--radius) * 0.8);
+  --font-times: "'Times New Roman', serif";
 }
 
 body {
@@ -32,8 +47,8 @@ body {
 }
 
 .tiptap-content {
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
+  font-family: var(--font-times);
+  line-height: 1;
   font-size: 1rem;
   color: #111827;
 
@@ -128,6 +143,12 @@ body {
   background-color: white;
 }
 .tab{
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+.tab:checked,
+.tab[aria-selected="true"]{
   background-color: white;
-  color: black;
+  color: #002A5F;
+  font-weight: 600;
 }
