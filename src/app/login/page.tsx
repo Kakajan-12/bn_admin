@@ -29,6 +29,7 @@ const Login = () => {
       if (!response.ok) {
         const errorData = await response.json();
         setError(errorData.errors ? errorData.errors[0].msg : "Login failed");
+        setLoading(false);
         return;
       }
       const data = await response.json();
@@ -38,8 +39,6 @@ const Login = () => {
     } catch (error) {
       console.error(error);
       setError("An unexpected error occurred");
-    } finally {
-      setLoading(false);
     }
   };
 
